@@ -29,7 +29,6 @@ app.get('/visitor-info', async (req, res) => {
     const ipToUse = (ip === '::1' || ip.startsWith('::ffff:127')) ? '' : ip;
 
     const response = await axios.get(`https://ipapi.co/${ipToUse}/json/`);
-    console.log(response.data);
     const user = new user_info({
       ip: ipToUse || 'Public IP auto-detected',
       dateTime : new Date().toLocaleString(),
@@ -43,6 +42,7 @@ app.get('/visitor-info', async (req, res) => {
       asn : response.data.asn,
       org : response.data.org,
     });
+    console.log(user);
     await user.save();
     res.json(user).status(200);
   } catch (err) {
