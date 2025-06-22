@@ -8,13 +8,13 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 mongoose.connect(process.env.MONGODB_URI, {
-  useNewUrlParser: true,
+  useNewUrlParser: true, 
   useUnifiedTopology: true,
 });
 
 
 const app = express();
-app.use(cors());
+app.use(cors({ origin: ['http://localhost:3000', 'http://localhost:8080' , 'https://www.harshdoshi.fyi/'] }));
 app.use(express.json());
 app.set('trust proxy', true); 
 
